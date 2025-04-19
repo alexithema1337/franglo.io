@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 URL Encoder/Decoder</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .encode-btn {
+            background-color: #3498db;
+            color: white;
+        }
+        .encode-btn:hover {
+            background-color: #2980b9;
+        }
+        .decode-btn {
+            background-color: #2ecc71;
+            color: white;
+        }
+        .decode-btn:hover {
+            background-color: #27ae60;
+        }
+        .copy-btn {
+            background-color: #f1c40f;
+            color: white;
+        }
+        .copy-btn:hover {
+            background-color: #e1b307;
+        }
+        .clear-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+        .clear-btn:hover {
+            background-color: #c0392b;
+        }
+        .error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        .success {
+            color: #2ecc71;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        @media (max-width: 500px) {
+            .container {
+                padding: 20px;
+            }
+            button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Base64 URL Encoder/Decoder</h2>
+        <input type="text" id="urlInput" placeholder="Enter URL or Base64 string here">
+        <div class="button-group">
+            <button class="encode-btn" onclick="encodeURL()">Encode</button>
+            <button class="decode-btn" onclick="decodeURL()">Decode</button>
+            <button class="copy-btn" onclick="copyOutput()">Copy Output</button>
+            <button class="clear-btn" onclick="clearFields()">Clear</button>
+        </div>
+        <p>Output:</p>
+        <textarea id="output" placeholder="Result will appear here"></textarea>
+        <div id="error" class="error"></div>
+        <div id="success" class="success"></div>
+    </div>
+
+    <script>
+        function encodeURL() {
+            const input = document.getElementById('urlInput').value.trim();
+            const output = document.getElementById('output');
+            const error = document.getElementById('error');
+            const success = document.getElementById('success');
+
+            error.style.display = 'none';
+            success.style.display = 'none';
+
+            if (!input) {
+                error.textContent = 'Please enter a URL to encode.';
+                error.style.display = 'block';
+                output.value = '';
+                return;
+            }
+
+            try {
+                const encoded = btoa(input);
+                output.value = encoded;
+                success.textContent = 'URL successfully encoded!';
+                success.style.display = 'block';
+            } catch (e) {
+                error.textContent = 'Error encoding URL. Please ensure the input is valid.';
+                error.style.display = 'block';
+                output.value = '';
+            }
+        }
+
+        function decodeURL() {
+            const input = document.getElementById('urlInput').value.trim();
+            const output = document.getElementById('output');
+            const error = document.getElementById('error');
+            const success = document.getElementById('success');
+
+            error.style.display = 'none';
+            success.style.display = 'none';
+
+            if (!input) {
+                error.textContent = 'Please enter a Base64 string to decode.';
+                error.style.display = 'block';
+                output.value = '';
+                return;
+            }
+
+            try {
+                const decoded = atob(input);
+                output.value = decoded;
+                success.textContent = 'Base64 string successfully decoded!';
+                success.style.display = 'block';
+            } catch (e) {
+                error.textContent = 'Error decoding Base64 string. Please ensure the input is valid Base64.';
+                error.style.display = 'block';
+                output.value = '';
+            }
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('output');
+            const success = document.getElementById('success');
+            const error = document.getElementById('error');
+
+            error.style.display = 'none';
+            success.style.display = 'none';
+
+            if (!output.value) {
+                error.textContent = 'Nothing to copy. Please encode or decode first.';
+                error.style.display = 'block';
+                return;
+            }
+
+            output.select();
+            navigator.clipboard.writeText(output.value).then(() => {
+                success.textContent = 'Output copied to clipboard!';
+                success.style.display = 'block';
+            }).catch(() => {
+                error.textContent = 'Failed to copy output.';
+                error.style.display = 'block';
+            });
+        }
+
+        function clearFields() {
+            document.getElementById('urlInput').value = '';
+            document.getElementById('output').value = '';
+            document.getElementById('error').style.display = 'none';
+            document.getElementById('success').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
