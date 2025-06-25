@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<title>PhP Code Obfuscator</title>
 		<meta name="about" content="For Obfuscating Php Code Given" />
-		<meta name="author" content="An0n 3xPloiTeR" />
+		<meta name="author" content="Alexithema" />
 		<meta name="description" content="For Obfuscating the Php Code given" />
 		<meta name="keywords" content="Obfuscator, index.php, Tool" />
 		<meta http-equiv="refresh" content="">
@@ -20,7 +20,7 @@
 		<meta name='search engines' content='Aeiwi,Alexa,AllTheWeb,AltaVista,AOLNetfind,Anzwers,Canada,DirectHit,EuroSeek,Excite,Overture,Go,Google,HotBot InfoMak,Kanoodle,Lycos,MachineSite,National Directory,Northern Light,SearchIt,SimpleSearch,WebsMostLinked,WebTop,What-U-Seek,AOL,Yahoo,WebCrawler,Infoseek,Excite,Magellan,LookSmart,bing,CNET,Googlebot' />
 		<script>
 			function _alert() {
-				alert("Php Obfuscator By An0n 3xPloiTeR");
+				alert("Php Obfuscator By Alexithema");
 				alert("Although There Are No Rights But You Aren't Supposed To Copy HTML too! :P");
 				return false;
 			} document.oncontextmenu = _alert;
@@ -135,7 +135,7 @@
 							$obfuscate_low_level = strrev(base64_encode(gzdeflate(gzcompress($phpcode))));
 							$obfuscate_medium_level = strrev(base64_encode(gzdeflate(gzdeflate(gzcompress($phpcode)))));
 							$obfuscate_high_level = strrev(base64_encode(gzdeflate(gzdeflate(gzdeflate(gzcompress(gzcompress($phpcode)))))));
-							$high_level = strrev(base64_encode(gzcompress(gzdeflate(gzcompress(gzdeflate(gzcompress(gzdeflate(gzcompress(gzdeflate(str_rot13($phpcode)))))))))));
+							$high_level = strrev(base64_encode(gzcompress(gzdeflate(gzcompress(gzdeflate(gzcompress(gzdeflate(gzcompress(gzdeflate(str_rot13($phpcode))))))))));
 							$high_level_1 = str_replace('a', '\x61', $high_level);
 							$high_level_2 = str_replace('A', '\x41', $high_level_1);
 							$high_level_3 = str_replace('b', '\x62', $high_level_2);
@@ -213,7 +213,7 @@ eval(htmlspecialchars_decode(gzinflate(base64_decode($stt1))));
         <div class="footer">
             <font>
             Developed By 
-                <span style="color: red;">An0n 3xPloiTeR</span>
+                <span style="color: red;">Alexithema</span>
             </font>
         </div>
 	</body>
